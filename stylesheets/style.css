@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display|Monofett|Nixie+One');
+
+/* top right bottom left (margins) topbottom leftright */
+
+body{
+    text-align: left;
+    margin: 30px 15% 20px 15%;
+    background-color: linen;
+    font-family: courier;
+}
+
+h1{
+    text-align: left;
+    padding: 10px;
+    margin: 10px 0px;
+    background-color: black;
+    color: coral;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 50px;
+    font-weight: normal;
+    transition: .3s;
+    border-width: 0px 3px 3px 0px;
+    border-color: coral;
+    border-style: dotted;
+}
+
+h1:hover{
+    color: linen;
+}
+
+h2{
+    text-align: right;
+    padding: 10px;
+    margin: 10px 0px;
+    background-color: black;
+    width: 80%;
+    color: linen;
+    font-weight: normal;
+    font-size: 18px;
+    border-radius: 0px 0px 0px 20px;
+}
+
+img{
+    padding: 5px;
+    margin: 0px;
+    width: 25%;
+    border-width: 3px;
+    border-color: dodgerblue;
+    border-style: dotted solid solid dotted;
+}
+
+div{
+    text-align: left;
+    padding: 30px 50px;
+    margin: 10px 0px;
+    color: dodgerblue;
+    background-color: transparent;
+    font-family: courier;
+    font-size: 18px;
+    border-width: 3px;
+    border-color: coral;
+    border-style: dotted;
+    display: block;
+}
+
+div.pic{
+    text-align: center;
+    padding: 0px;
+    margin: 10px 0px;
+    display: block;
+    background-color: transparent;
+    border-width: 0px;
+}
+
+div.title{
+    text-align: left;
+    padding: 10px;
+    margin: 0px 0px;
+    color: black;
+    background-color: transparent;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 30px;
+    border-width: 3px;
+    border-style: solid;
+    display: inline-block;
+}
+
+div.titlebox{
+    text-align: left;
+    padding: 0px;
+    margin: 10px 0px;
+    display: block;
+    background-color: transparent;
+    border-width: 0px;
+}
+
+a:link, a:visited{
+    padding: 10px 20px;
+    margin: 0px 0px 10px 0px;
+    background-color: black;
+    color: coral;
+    display: inline-block;
+    font-family: courier;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    border-width: 0px;
+    border-color: dodgerblue;
+    border-style: dotted solid solid dotted;
+    border-radius: 0px 0px 0px 20px;
+    transition: .15s;
+}
+
+a:hover, a:active{
+    color: linen;
+    font-size: 20px;
+}
+
+hr{
+    padding: 2px;
+    margin: 30px 30%;
+    border-width: 3px;
+    border-color: dodgerblue transparent coral transparent;
+    border-style: solid;
+}

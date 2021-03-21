@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head><title>- MouseX MouseY Draw TM-</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
+
+<style> 
+body {padding: 0; margin: 0;
+-webkit-user-select: none;} 
+</style>
+<script language="javascript" type="text/javascript" src="p5/p5.min.js"></script>
+<script>
+
+function setup() {	
+	createCanvas(displayWidth, displayHeight)
+	background(255,255,250)
+}
+    
+function touchMoved() {
+//    for (let i = 0; i < 20; i++){
+//        var mycolor=color(250,200,200,50)
+//        stroke(mycolor)
+//        strokeWeight(20)
+//        line(mouseX, mouseY, pmouseX, pmouseY)
+//        print(pmouseX + ' -> ' + mouseX)
+//    }
+    
+	var mycolor=color(250,200,200,50)
+	stroke(mycolor)
+	strokeWeight(20)
+	line(mouseX, mouseY, pmouseX, pmouseY)
+	print(pmouseX + ' -> ' + mouseX)
+}
+
+function BlockMove(event) {
+	// Tell Safari not to move the window.
+	event.preventDefault() ;
+}
+</script>
+</head>
+<body ontouchmove="BlockMove(event);">
+</body>
+</html>
+

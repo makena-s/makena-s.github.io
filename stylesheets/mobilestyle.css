@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Rye&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px&display=swap');
+
+/*
+@import url('https://fonts.googleapis.com/css?family=Inknut+Antiqua:600|Palanquin|Rye|Source+Code+Pro&display=swap');
+
+font-family: 'Rye', cursive;
+font-family: 'Inknut Antiqua', serif;
+font-family: 'Source Code Pro', monospace;
+font-family: 'Palanquin', sans-serif;
+*/
+
+/* top right bottom left (margins) topbottom leftright */
+/* can font and color stuff be put in the body, to be inherited by the divs? */
+
+body{
+    text-align: center;
+    padding: 0%;
+    margin: 5% 0%;
+    background-color: black;
+    color: white;
+    font-family: 'Slabo 27px', serif;
+    font-size: 50px;
+}
+
+h1{
+    text-align: center;
+    padding: 30px 50px;
+    margin: 5%;
+    color: white;
+    background-color: transparent;
+    font-family: 'Rye', cursive;
+    font-weight: normal;
+    font-size: 90px;
+    border-width: 8px;
+    border-color: darkorange;
+    border-style: dotted dotted solid solid;
+    display: block;
+    /*transition: color 3s;*/
+}
+
+div{
+    text-align: left;
+    padding: 30px 50px;
+    margin: 5%;
+    color: white;
+    background-color: transparent;
+    font-family: 'Slabo 27px', serif;
+    font-size: 50px;
+    border-width: 8px;
+    border-color: turquoise;
+    border-style: dotted dotted solid solid;
+    display: block;
+}
+
+div.pic{
+    text-align: center;
+    padding: 30px; 
+    margin: 5%; /* change bottom margin */
+    background-color: transparent;
+	border-width: 8px;
+    border-color: mediumslateblue;
+    border-style: dotted dotted solid solid;
+    display: block;
+}
+
+img{
+    width: 100%; 
+}
+
+a:link, a:visited{
+    text-align: center;
+    padding: 30px 50px;
+    margin: 5%;
+    color: white;
+    background-color: transparent;
+    font-family: 'Rye', cursive;
+    text-decoration: none;
+    /* font-weight: normal; */
+    font-size: 50px;
+    border-width: 8px;
+    border-color: deepskyblue;
+    border-style: dotted dotted solid solid;
+    display: block;
+    /* transition: .5s; */
+}
+
+a:hover, a:active{
+    color: deepskyblue;
+    /* font-size: 20px; */
+}

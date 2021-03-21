@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head><title>+ Circle +</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="../images/circle180.png"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
+
+<!-- Android, not sure if working --> 
+<meta name="theme-color" content="#014473">
+
+<style> 
+body {
+padding: 0; 
+margin: 0;
+-webkit-user-select: none;
+} 
+</style>
+<script language="javascript" type="text/javascript" src="https://class.arts.ucsb.edu/~art102/includes/p5/p5.js"></script>
+<script>
+	var radius=100
+	var amount_of_rects=20
+	//This function is automatically triggered when the p5 library is loaded
+	function setup() {
+		createCanvas(displayWidth, displayHeight)
+		
+	}
+	
+	//This function is automatically triggered when the p5 library is loaded 
+	//after the setup function. Unlike plain javascript functions, it is runs repeatedly
+	  
+	function draw() {
+		for(i=0;i<amount_of_rects;i++){
+			var myred=random(255)
+			//console.log(myred)
+			var mygreen=random(255)
+			var myblue=random(255)
+			var myc=color(myred,mygreen,myblue,50)
+			fill(myc)
+			noStroke()
+		
+			var myw= random(15, 35)
+			var myh = random(15, 35)
+			var circle_center_x=displayWidth/2
+			var circle_center_y=displayHeight/2
+			var myx=(circle_center_x + radius * Math.cos(2 * Math.PI * i / amount_of_rects));
+			var myy=(circle_center_y + radius * Math.sin(2 * Math.PI * i / amount_of_rects));	
+
+			var corner_r=random(10)
+			rect(myx, myy, myw, myh, corner_r)
+		}
+	}
+
+	//this function is called when a ontouchmove is triggered in the body. It is not a p5 function
+	function BlockMove(event) {
+		// Tell the browser to not to "bounce" the content.
+		event.preventDefault();
+	}
+
+</script>
+</head>
+<body ontouchmove="BlockMove(event);">
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<!-- if+loop -->
+
+<html>
+    
+    
+<head>
+    
+
+<title>if+loop</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" sizes="180x180" href="images/touch-icon-iphone-retina.png">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
+
+<!-- Android, not sure if working --> 
+<meta name="theme-color" content="#014473">
+
+    
+<style> 
+body {
+padding: 0; 
+margin: 0;
+-webkit-user-select: none;
+} 
+</style>
+
+
+<script language="javascript" type="text/javascript" src="p5/p5.js"></script>
+<script>
+
+	//This function is automatically triggered when the p5 library is loaded
+	function setup() {
+		createCanvas(displayWidth, displayHeight)
+        bgred = random(200,255)
+        bggreen = random(200,255)
+        bgblue = random(200,255)
+        background(bgred,bggreen,bgblue)
+        bg = color(bgred,bggreen,bgblue,15)
+        rectMode(CENTER)
+        noStroke()
+        frameRate(60)
+        // perlin
+        variationx = 0.0;
+        variationc = 0.0;
+        
+        radius = displayWidth/4
+        shapenum = 60
+        counter = 0
+        myred = random(255)
+        mygreen = random(255)
+        myblue = random(255)
+        
+        radiusb = displayWidth/2.2
+        
+        radius2 = displayWidth/2.5
+        shapenum2 = 220
+        counter2 = 0
+        myred2 = random(255)
+        mygreen2 = random(255)
+        myblue2 = random(255)
+        
+        radius3 = displayWidth/3
+        shapenum3 = 70
+        counter3 = 0
+        myred3 = random(255)
+        mygreen3 = random(255)
+        myblue3 = random(255)
+	}
+	
+	//This function is automatically triggered when the p5 library is loaded 
+	//after the setup function. Unlike plain javascript functions, it is runs repeatedly
+	  
+	function draw() {
+        background(bg)
+        
+        //reset color 1 after full loop
+        if (counter > shapenum-1) {
+            myred = random(255)
+            mygreen = random(255)
+            myblue = random(255)
+            counter = 0
+        }
+        //reset color 2 after full loop
+        if (counter2 > shapenum2-1) {
+//            myred2 = random(255)
+//            mygreen2 = random(255)
+//            myblue2 = random(255)
+            counter2 = 0
+        }
+        //reset color 3 after full loop
+        if (counter3 > shapenum3-1) {
+            myred3 = random(255)
+            mygreen3 = random(255)
+            myblue3 = random(255)
+            counter3 = 0
+        }
+
+        // test counter 
+//        fill(255,255,255)
+//        rect(100,100, 100, 100)
+//        fill(0,255,255) // affects the circle for some reason??????
+//        textSize(30)
+//        text(counter, 100, 100)
+
+        // PERLIN NOISE
+        variationx += 0.08;
+        perlinx = noise(variationx) * displayWidth/8;
+        variationc += 0.03;
+        perlinc = noise(variationc) * 255;   
+        
+        // RING ONE (small)
+        // calculate size
+        var myw = displayWidth/40
+        var myh = displayWidth/40
+        // calculate position
+        var circle_center_x=displayWidth/2
+        var circle_center_y=displayHeight/2
+        var myx=(circle_center_x + radius * Math.cos(2 * Math.PI * counter / shapenum));
+        var myy=(circle_center_y + radius * Math.sin(2 * Math.PI * counter / shapenum));
+        
+        // RING ONE B (big)
+        // calculate size
+        var mywb = displayWidth/30
+        var myhb = displayWidth/30
+        // calculate position
+        var myxb=(circle_center_x + radiusb * Math.cos(2 * Math.PI * counter / shapenum));
+        var myyb=(circle_center_y + radiusb * Math.sin(2 * Math.PI * counter / shapenum));
+           
+        // RING TWO (x shape)
+        // calculate size
+        var myw2 = displayWidth/4
+        var myh2 = displayWidth/4
+        // calculate position
+        var circle_center_x2=displayWidth/2
+        var circle_center_y2=displayHeight/2
+        var myx2=(circle_center_x2 + radius2 * Math.sin(2 * Math.PI * counter2 / shapenum2));
+        var myy2=(circle_center_y2 + radius2 * Math.tan(2 * Math.PI * counter2 / shapenum2));
+        
+        // RING THREE (medium)
+        // calculate size
+        var myw3 = displayWidth/28
+        var myh3 = displayWidth/28
+        // calculate position
+        var circle_center_x3=displayWidth/2
+        var circle_center_y3=displayHeight/2
+        var myx3=(circle_center_x3 + radius3 * Math.sin(2 * Math.PI * counter3 / shapenum3));
+        var myy3=(circle_center_y3 + radius3 * Math.cos(2 * Math.PI * counter3 / shapenum3));
+        
+        
+        // draw shape two
+        myc2 = color(255-perlinc/2,perlinc/2,perlinc)
+        fill(myc2)
+        ellipse(myx2, myy2, myw2, myh2)
+        // draw shape three
+        myc3 = color(myred3,mygreen3,myblue3)
+        fill(myc3)
+        ellipse(myx3, myy3, myw3 + perlinx, myh3 + perlinx)
+        // draw shape one
+        myc = color(myred,mygreen,myblue)
+        fill(myc)
+        ellipse(myx, myy, myw, myh)
+        // draw shape one BEE
+        ellipse(myxb, myyb, mywb, myhb)
+        //draw center
+        for (let i = 0; i < 5; i++) {
+        fill(random(200,255),random(200,255),random(200,255), random(255))
+            dustsize = random(displayWidth/60,displayWidth/8)
+            dustfield = displayWidth/10
+            ellipse(circle_center_x+random(-dustfield, dustfield), circle_center_y+random(-dustfield, dustfield), dustsize, dustsize)
+            ellipse(circle_center_x, circle_center_y, dustsize, dustsize)
+        }
+        
+        counter += 1
+        counter2 += 1
+        counter3 += 1
+    }
+    
+    
+	//this function is called when a ontouchmove is triggered in the body. It is not a p5 function
+	function BlockMove(event) {
+		// Tell the browser to not to "bounce" the content.
+		event.preventDefault();
+	}
+    
+    
+    // reset bg when touched 
+    function touchEnded() {
+        bgred = random(200,255)
+        bggreen = random(200,255)
+        bgblue = random(200,255)
+        background(bgred,bggreen,bgblue)
+        bg = color(bgred,bggreen,bgblue,15)
+    }
+</script>
+    
+    
+</head>
+    
+    
+<body ontouchmove="BlockMove(event);"></body>
+    
+    
+</html>

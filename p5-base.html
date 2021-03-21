@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<!-- p5js base -->
+
+<html>
+    
+<head>
+    
+<title>p5js base</title>
+    
+<!-- APP STUFF -->
+    <!-- web app capable --> 
+<meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- viewport --> 
+<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
+    <!-- status bar --> 
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- android status bar (not sure if it works) --> 
+<meta name="theme-color" content="#014473">
+    <!-- app icon --> 
+<link rel="apple-touch-icon" sizes="180x180" href="images/touch-icon-iphone-retina.png">
+    
+    <!-- import p5 --> 
+<script language="javascript" type="text/javascript" src="p5/p5.js"></script>
+    <!-- import p5 dom --> 
+<script language="javascript" type="text/javascript" src="p5/p5.dom.js"></script>
+    <!-- import p5 sound --> 
+<script language="javascript" type="text/javascript" src="p5/p5.sound.min.js"></script>
+
+<!-- CSS STYLE -->
+<style> 
+    body {
+        background: rgb(100,100,100);
+        padding: 0; 
+        margin: 0;
+        -webkit-user-select: none;
+    } 
+    #get_permission_button{
+        text-align: center;
+        font-family: courier;
+        font-size: 20pt;
+        color: white;
+        display: block;
+        position: absolute;
+        top: 65vh;
+        left: 0vw;
+        z-index: 1;
+    }
+</style>
+
+<!-- APP SCRIPT -->
+<script>
+    
+    // global variables
+    // let 
+    
+    function preload() {
+	// soundFormats('mp3');
+    // note1 = loadSound('sounds/note1.wav');
+    }
+    
+	function setup() {
+        noLoop();
+        get_permission_to_use_orientation() 
+        get_permission_to_use_motion()
+        
+		createCanvas(displayWidth, displayHeight)
+        background(100,100,100)
+        rectMode(CENTER)
+        textAlign(CENTER)
+        noStroke()
+        frameRate(60)
+        // PERLIN NOISE
+        // variationx = 0.0;
+	}
+	
+	function draw() {
+        background(100,100,100)
+        fill(random(255), random(255), random(255))
+        ellipse(displayWidth/2, displayHeight/2, 50, 50)
+        // PERLIN NOISE
+        // variationx += 0.08;
+        // perlinx = noise(variationx) * displayWidth/8;
+    }
+    
+	// this function is called when a ontouchmove is triggered in the body. it is not a p5 function
+	function BlockMove(event) {
+		// tell the browser to not to "bounce" the content
+		event.preventDefault();
+	}
+    
+    // motion permission
+    function get_permission_to_use_motion() { // DO NOT CHANGE!
+    if (typeof DeviceMotionEvent !== "undefined") { 
+		if (typeof DeviceMotionEvent.requestPermission === 'function') {
+		  DeviceMotionEvent.requestPermission()
+			.then(permissionState => {
+			  if (permissionState === 'granted') {
+			  	document.getElementById("get_permission_button").style.display="none"	
+			  	loop();		
+			  }
+			})
+			.catch(console.error);
+		}else{
+			alert("not an ios13 device")
+			console.log("not an ios13 device")
+			document.getElementById("get_permission_button").style.display="none"	
+		}
+	}else{
+			alert("not an mobile device")
+			console.log("not an mobile device")
+			document.getElementById("get_permission_button").style.display="none"	
+    }
+    }
+    
+    // orientation permission
+    function get_permission_to_use_orientation() { // DO NOT CHANGE!
+    if (typeof DeviceOrientationEvent !== "undefined") { 
+		if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+		  DeviceOrientationEvent.requestPermission()
+			.then(permissionState => {
+			  if (permissionState === 'granted') {
+			  	document.getElementById("get_permission_button").style.display="none"	
+			  	loop();		
+			  }
+			})
+			.catch(console.error);
+		} else {
+		  console.log("not an ios +13 device")
+		  document.getElementById("get_permission_button").style.display="none"	
+		}
+    }
+    }
+    
+</script>
+    
+</head>
+    
+<body ontouchmove="BlockMove(event);">
+    <span id="get_permission_button" onmouseup="get_permission_to_use_motion(), get_permission_to_use_orientation()">>> accept persimmons</span>
+</body>
+    
+</html>
