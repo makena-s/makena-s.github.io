@@ -24,9 +24,11 @@ h1{
     border-style: dotted;
 }
 
+/*
 h1:hover{
     color: linen;
 }
+*/
 
 h2{
     text-align: right;
@@ -41,12 +43,23 @@ h2{
 }
 
 img{
+    text-align: center;
     padding: 5px;
     margin: 0px;
     width: 25%;
     border-width: 3px;
     border-color: dodgerblue;
     border-style: dotted solid solid dotted;
+}
+
+img.center{
+    text-align: center;
+    padding: 5px;
+    margin: 10px auto;
+    display: block;
+    background-color: transparent;
+    border-width: 3px;
+    border-color: mediumslateblue;
 }
 
 div{
