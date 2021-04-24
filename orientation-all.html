@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<!-- p5js base -->
+
+<html>
+    
+<head>
+    
+<title>!orientation!</title>
+    
+<!-- APP STUFF -->
+    <!-- web app capable --> 
+<meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- viewport --> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- status bar --> 
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- android status bar (not sure if it works) --> 
+<meta name="theme-color" content="#014473">
+    <!-- app icon --> 
+<link rel="apple-touch-icon" sizes="180x180" href="images/icon-iphone-retina.png">
+<link rel="apple-touch-icon" sizes="152x152" href="images/icon-ipad.png">
+<link rel="apple-touch-icon" sizes="167x167" href="images/icon-ipad-retina.png">
+    <!-- splashscreens -->
+<link href="images/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="images/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+
+    
+    <!-- import p5 --> 
+<script language="javascript" type="text/javascript" src="p5/p5.js"></script>
+    <!-- import p5 dom --> 
+<script language="javascript" type="text/javascript" src="p5/p5.dom.js"></script>
+
+<!-- CSS STYLE -->
+<style> 
+    body {
+        background: rgb(0,0,0);
+        padding: 0; 
+        margin: 0;
+        -webkit-user-select: none;
+    } 
+    #get_permission_button{
+        text-align: center;
+        font-family: courier;
+        font-size: 20pt;
+        color: white;
+        display: block;
+        position: absolute;
+        top: 65vh;
+        left: 0vw;
+        z-index: 1;
+    }
+</style>
+
+<!-- APP SCRIPT -->
+<script>
+    
+    // global variables
+    let xpos, ypos, xspeed, yspeed, myc, bgred, bggreen, bgblue, mystroke, speedshrink, size, gap, mywidth, myheight
+    
+    function preload() {
+        print("preload")
+    }
+    
+	function setup() {
+//        noLoop();
+//        get_permission_to_use_orientation() 
+        
+        mywidth = windowWidth
+        myheight = windowHeight
+		var mycanvas = createCanvas(mywidth, myheight)
+        mycanvas.position(0,0)
+        background(0,0,0)
+        rectMode(CENTER)
+        textAlign(CENTER)
+        strokeWeight(2)
+        frameRate(60)
+    
+        myc = color(random(255),random(255),random(255),30)
+        // initial position vars
+        xpos = mywidth/2
+        ypos = myheight/2
+        xspeed = 0
+        yspeed = 0
+        speedshrink = 0
+        size = mywidth/20
+        gap = mywidth/15
+        
+        print("mywidth" + mywidth)
+        print("myheight" + myheight)
+        print("displaywidth" + displayWidth)
+        print("displayheight" + displayHeight)
+	}
+	
+	function draw() {
+        // colors
+        var myR= floor(map(rotationZ, 0, 360, 0, 255, true))
+        var myG= 200
+        var myB= 200
+//        console.log("xspeed"+ xspeed)
+//        console.log("yspeed"+ yspeed)
+//        console.log("zrotation"+ rotationZ)
+        
+        // calc speed
+        xspeed = map(rotationY, -30, 30, -10, 10, true)
+        yspeed = map(rotationX, -30, 30, -10, 10, true)
+        speedshrink = (abs(xspeed) + abs(yspeed)) * 1.5
+        
+        if (xpos > mywidth || xpos < 0){
+            xpos = mywidth/2
+            ypos = myheight/2
+        }
+        if (ypos > myheight || ypos < 0){
+            xpos = mywidth/2
+            ypos = myheight/2
+        }
+        
+        xpos += xspeed
+        ypos += yspeed
+        
+        // draw shape
+        mystroke=color(myR,myG,myB,100)
+        stroke(mystroke)
+        fill(myc)
+        ellipse(xpos, ypos, size-speedshrink, size-speedshrink);
+        
+        // draw frame
+        // start upper left, go clockwise
+        line(gap, gap, mywidth-gap, gap)
+        line(mywidth-gap, gap, mywidth-gap, myheight-gap)
+        line(mywidth-gap, myheight-gap, gap, myheight-gap)
+        line(gap, myheight-gap, gap, gap)
+        
+        ellipse(gap, gap, size, size)
+        ellipse(mywidth-gap, gap, size, size)
+        ellipse(mywidth-gap, myheight-gap, size, size)
+        ellipse(gap, myheight-gap, size, size)
+        
+        //line(0,myheight/2, mywidth, myheight/2)
+        }
+    
+    function touchEnded() {
+        bgred = random(0,100)
+        bggreen = random(0,100)
+        bgblue = random(0,100)
+        background(bgred,bggreen,bgblue)
+        myc = color(random(255),random(255),random(255),30)
+    }
+    
+	// this function is called when a ontouchmove is triggered in the body. it is not a p5 function
+	function BlockMove(event) {
+		// tell the browser to not to "bounce" the content
+		event.preventDefault();
+	}
+    
+    // orientation permission
+    function get_permission_to_use_orientation() { // DO NOT CHANGE!
+    if (typeof DeviceOrientationEvent !== "undefined") {
+		if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+		  DeviceOrientationEvent.requestPermission()
+			.then(permissionState => {
+			  if (permissionState === 'granted') {
+			  	document.getElementById("get_permission_button").style.display="none"	
+			  	loop();		
+			  }
+			})
+			.catch(console.error);
+		} else {
+            //alert("not an ios13+ device")
+		  console.log("sorry! this app does not support ios 12!")
+		  document.getElementById("get_permission_button").style.display="none"
+            loop();
+        }
+        }else {
+			//alert("not a mobile device")
+			console.log("not a mobile device!")
+			document.getElementById("get_permission_button").style.display="none"
+            loop();
+        }
+    }
+    
+</script>
+    
+</head>
+    
+<body ontouchmove="BlockMove(event);">
+    <span id="get_permission_button" onmouseup="get_permission_to_use_orientation()">>> accept persimmons</span>
+</body>
+    
+</html>
